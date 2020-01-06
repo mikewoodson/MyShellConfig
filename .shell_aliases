@@ -1,0 +1,7 @@
+# exports
+export EDITOR=vim
+export PSP='/usr/lib/python2.7/site-packages/'
+
+# aliases
+alias tuzip='tar -xvzf'
+alias vi='vim'
