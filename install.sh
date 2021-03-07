@@ -1,43 +1,15 @@
 #!/bin/bash
 declare -a configFiles=('.zprofile' '.zshrc' '.shell_aliases' '.vimrc' '.tmux.conf' '.tmux.reset.conf')
 
-if [ -f /etc/os-release ]; then
-   # freedesktop.org and systemd
-   . /etc/os-release
-   OS=$NAME
-   VER=$VERSION_ID
-elif type lsb_release >/dev/null 2>&1; then
-   # linuxbase.org
-   OS=$(lsb_release -si)
-   VER=$(lsb_release -sr)
-elif [ -f /etc/lsb-release ]; then
-   # For some versions of Debian/Ubuntu without lsb_release command
-   . /etc/lsb-release
-   OS=$DISTRIB_ID
-   VER=$DISTRIB_RELEASE
-elif [ -f /etc/debian_version ]; then
-   # Older Debian/Ubuntu/etc.
-   OS=Debian
-   VER=$(cat /etc/debian_version)
-elif [ -f /etc/redhat-release ]; then
-   OS=Redhat
+if command -v apt -v &> /dev/null; then
+   pkgMgr=apt
 else
-   # Fall back to uname, e.g. "Linux <version>", also works for BSD, etc.
-   OS=$(uname -s)
-   VER=$(uname -r)
-fi
-
-if [ "$OS" == Debian -o "$OS" == "Debian GNU/Linux" ]; then
-   pkgMgr='apt'
-elif [ "$OS" == Redhat ]; then
-   pkgMgr='yum'
-else
-   echo >&2 "Installation requires apt or yum package manager. Exiting"
-   exit 1
+   echo "no"
+   exit 0
 fi
 
 # check if tmux is installed
-if [ ! tmux -V >/dev/null 2>&1 ]; then
+if ! command -v tmux -V &> /dev/null; then
    read -p "tmux is not installed, would you like to install? (y/n) " response
    if [ "$response" = "y" ]; then
       echo "updating package lists"
@@ -73,7 +45,7 @@ else
 fi
 
 # check if zsh is installed
-if [ ! zsh --version >/dev/null 2>&1 ]; then
+if ! command -v zsh --version &> /dev/null; then
    read -p "zsh is not installed, would you like to install? (y/n) " response
    if [ "$response" = "y" ]; then
       echo "updating package lists"
