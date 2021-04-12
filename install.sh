@@ -87,7 +87,8 @@ for file in "${configFiles[@]}"; do
       read -p "'$file' already exists. Are you sure you want to overwrite (y/n)? " response
       if [ "$response" = "y" ]; then
          echo "installing '$file' into $HOME"
-         cp $file $HOME
+	 mv $HOME/$file $HOME/$file'_backup'
+         ln $file $HOME/$file
       elif [ "$response" = "n" ]; then
          echo "Skipping installation of '$file'"
       else
@@ -95,6 +96,6 @@ for file in "${configFiles[@]}"; do
       fi
    else
       echo "installing '$file' into $HOME"
-      cp $file $HOME
+      ln $file $HOME/$file
    fi
 done
