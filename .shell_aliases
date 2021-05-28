@@ -1,7 +1,21 @@
 # exports
+export PATH="$PATH:/home/mwoodson/.local/bin"
 export EDITOR=vim
 export PSP='/usr/lib/python2.7/site-packages/'
 
 # aliases
 alias tuzip='tar -xvzf'
 alias vi='vim'
+alias python='python3'
+alias pip='pip3'
+
+# apt aliases
+apts='apt search' # search remote repo for package
+# search if package is installed
+aptl() {
+   if [ "$#" -ne 1 ]; then
+      echo "Usage: aptl <package>"
+   else
+      apt list $1 --installed
+   fi
+}
