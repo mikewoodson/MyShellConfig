@@ -19,3 +19,11 @@ aptl() {
       apt list $1 --installed
    fi
 }
+
+installAll() {
+   if [ "$#" -ne 1 ]; then
+      echo "Usage: installAll <file>"
+   else
+      sudo xargs -a $1 apt install
+   fi
+}
