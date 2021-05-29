@@ -29,7 +29,7 @@ listAllPackages() {
    if [ "$#" -ne 1 ]; then
       echo "Usage: listAllPackages <file>"
    else
-      sudo dpkg-query -f '${binary:Package}\n' -W > $1
+      apt list --installed | awk -F "/" '{print $1}' | tail -n +2 > $1
    fi
 }
 
