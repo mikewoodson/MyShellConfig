@@ -1,5 +1,10 @@
 # exports
 export PATH="$PATH:/home/mwoodson/.local/bin"
+
+# Below two lines for cuda support
+export PATH="/usr/local/cuda-11.3/bin${PATH:+:${PATH}}"
+export LD_LIBRARY_PATH=/usr/local/cuda-11.3/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
 export EDITOR=vim
 export PSP='/usr/lib/python2.7/site-packages/'
 
@@ -17,6 +22,14 @@ aptl() {
       echo "Usage: aptl <package>"
    else
       apt list $1 --installed
+   fi
+}
+
+listAllPackages() {
+   if [ "$#" -ne 1 ]; then
+      echo "Usage: listAllPackages <file>"
+   else
+      sudo dpkg-query -f '${binary:Package}\n' -W > $1
    fi
 }
 
