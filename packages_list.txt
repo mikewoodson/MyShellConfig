@@ -707,6 +707,7 @@ libctf0
 libcublas-11-3
 libcublas-dev-11-3
 libcudnn8-dev
+libcudnn8-samples
 libcudnn8
 libcue2
 libcufft-11-3
@@ -845,6 +846,8 @@ libfontenc1
 libfprint-2-2
 libfprint-2-tod1
 libfreehand-0.1-1
+libfreeimage-dev
+libfreeimage3
 libfreerdp-client2-2
 libfreerdp2-2
 libfreetype6
@@ -1047,6 +1050,7 @@ libjson-glib-1.0-common
 libjsoncpp1
 libjuh-java
 libjurt-java
+libjxr0
 libk5crypto3
 libkate1
 libkeyutils1
@@ -1946,6 +1950,7 @@ python3-xkit
 python3-yaml
 python3.8-dev
 python3.8-minimal
+python3.8-venv
 python3.8
 python3
 qt5-gtk-platformtheme

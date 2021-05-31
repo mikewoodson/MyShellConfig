@@ -40,3 +40,11 @@ installAll() {
       sudo xargs -a $1 apt install
    fi
 }
+# list installation locations for files in package
+pfiles() {
+   if [ "$#" -ne 1 ]; then
+      echo "Usage: pfiles <package>"
+   else
+      dpkg -L $1
+   fi
+}
